@@ -5,6 +5,20 @@ import uuid
 class Genre(models.Model):
     name = models.CharField(max_length=100, help_text='Введите жанр книги')
 
+    class Meta:
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
+
+    def __str__(self):
+        return self.name
+
+class Language(models.Model):
+    name = models.CharField(max_length=100, help_text='Выберите язык вашей книги')
+
+    class Meta:
+        verbose_name = 'Язык'
+        verbose_name_plural = 'Языки'
+
     def __str__(self):
         return self.name
 
@@ -14,6 +28,11 @@ class Book(models.Model):
     summary = models.TextField(max_length=1000, help_text='Введите краткое описание книги')
     isbn = models.CharField('ISBN', max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     genre = models.ManyToManyField(Genre, help_text='Выберите жанр для этой кнмги')
+    language = models.ManyToManyField(Language, help_text='Выберите язык вашей книги')
+
+    class Meta:
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
 
     def __str__(self):
         return self.title
@@ -21,11 +40,6 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('dook-detail', args=[str(self.id)])
 
-class Language(models.Model):
-    name = models.CharField(max_length=100, help_text='Выберите язык вашей книги')
-
-    def __str__(self):
-        return self.name
 
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Уникальный идентификатор для книги в бииблиотеке')
@@ -44,6 +58,8 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ["due_back"]
+        verbose_name = 'Экземпляр'
+        verbose_name_plural = 'Экземпляры'
 
     def __str__(self):
         return '{0} ({1})'.format(self.id, self.book.title)
@@ -56,6 +72,10 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         return reverse('author-details', args=[str(self.id)])
+
+    class Meta:
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
 
     def __str__(self):
         return '{0} {1}'.format(self.first_name, self.last_name)
