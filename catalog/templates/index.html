@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Главная страница{% endblock %}
+{% block content %}
+<h1>Local Library Home</h1>
+
+  <p>Добро пожаловать в <em>LocalLibrary</em></p>
+
+<h2>Динамический контент</h2>
+
+  <p>Библиотека имеет: :</p>
+  <ul>
+    <li><strong>Количество книг:</strong> {{ num_books }}</li>
+    <li><strong>Количество экземпляров:</strong> {{ num_instances }}</li>
+    <li><strong>Доступных экземпляров:</strong> {{ num_instances_available }}</li>
+    <li><strong>Количество авторов:</strong> {{ num_authors }}</li>
+    <li><strong>Тест:</strong> {{ num_fan }}</li>
+  </ul>
+
+{% endblock %}
