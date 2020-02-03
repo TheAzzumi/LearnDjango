@@ -43,7 +43,7 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('dook-detail', args=[str(self.id)])
+        return reverse('book-detail', args=[str(self.id)])
 
 
 class BookInstance(models.Model):
@@ -76,7 +76,7 @@ class Author(models.Model):
     date_of_death = models.DateField('Death', null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('author-details', args=[str(self.id)])
+        return reverse('author-detail', args=[str(self.id)])
 
     class Meta:
         verbose_name = 'Автор'
