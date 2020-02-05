@@ -75,27 +75,33 @@ def renew_book_librarian(request, pk):
 
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
 
-class AuthorCreate(CreateView):
+class AuthorCreate(PermissionRequiredMixin, CreateView):
     model = Author
+    permission_required = 'catalog.can_mark_returned'
     fields = '__all__'
     initial={'date_of_death':'12/10/2016',}
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(PermissionRequiredMixin,UpdateView):
     model = Author
+    permission_required = 'catalog.can_mark_returned'
     fields = ['first_name','last_name','date_of_birth','date_of_death']
 
-class AuthorDelete(DeleteView):
+class AuthorDelete(PermissionRequiredMixin,DeleteView):
     model = Author
+    permission_required = 'catalog.can_mark_returned'
     success_url = reverse_lazy('authors')
 
-class BookCreate(CreateView):
+class BookCreate(PermissionRequiredMixin,CreateView):
     model = Book
+    permission_required = 'catalog.can_mark_returned'
     fields = '__all__'
 
-class BookUpdate(UpdateView):
+class BookUpdate(PermissionRequiredMixin,UpdateView):
     model = Book
+    permission_required = 'catalog.can_mark_returned'
     fields = '__all__'
 
-class BookDelete(DeleteView):
+class BookDelete(PermissionRequiredMixin,DeleteView):
     model = Book
+    permission_required = 'catalog.can_mark_returned'
     success_url = reverse_lazy('books')

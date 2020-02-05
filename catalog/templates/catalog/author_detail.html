@@ -2,7 +2,13 @@
 {% block title %} {{ author.first_name }} {{ author.last_name }} {% endblock %}
 
 {% block content %}
-  <h1> {{ author.first_name }} {{ author.last_name }}</h1>
+  <style>
+    #h1 {
+       display:inline;
+    }
+  </style>
+
+  <p><h1 id = 'h1'> {{ author.first_name }} {{ author.last_name }}</h1>{% if perms.catalog.can_mark_returned %} <a href = "{% url 'author_update' author.pk%}">Редактировать</a>  <a href = "{% url 'author_delete' author.pk%}">Удалить</a> {% endif %}</p>
 
   <p><strong>Date of birth:</strong> {{ author.date_of_birth }}</p>
   <p><strong>Date of death:</strong> {{ author.date_of_death }}</p>

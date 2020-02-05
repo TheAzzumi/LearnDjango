@@ -3,11 +3,16 @@
 {% block title %} {{ book.title }} {% endblock %}
 
 {% block content %}
-  <h1>Title: {{ book.title }}</h1>
+  <style>
+    #h1 {
+       display:inline;
+    }
+  </style>
+  <p><h1 id = 'h1'>Title: {{ book.title }}</h1> {% if perms.catalog.can_mark_returned %} <a href = "{% url 'book_update' book.pk%}">Редактировать</a>  <a href = "{% url 'book_delete' book.pk%}">Удалить</a> {% endif %}</p>
 
   <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
   <p><strong>Summary:</strong> {{ book.summary }}</p>
-  <p><strong>ISBN:</strong> {{ book.isbn }}</p> 
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
   <p><strong>Language:</strong> {{ book.language }}</p>  
   <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
 
