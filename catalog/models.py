@@ -83,7 +83,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('Death', null=True, blank=True)
+    date_of_death = models.DateField('died', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('author-detail', args=[str(self.id)])
